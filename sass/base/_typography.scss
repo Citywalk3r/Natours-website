@@ -1,0 +1,96 @@
+body {
+    font-family: "Lato", sans-serif; /*Lato is a google 
+                                        font included in the html file.
+                                        If not found, use sans-serif*/
+    font-weight: 400;
+    /*font-size: 16px;*/
+    line-height: 1.7; /*1.7 times bigger than the predefined line-height*/
+    color:$color-grey-dark;
+    box-sizing: border-box; /* change the box model so 
+                            that borders and paddings are 
+                            no longer added to the total width and height 
+                            that we specify for a box */
+}
+
+.heading-primary {
+    color: $color-white;
+    text-transform: uppercase;
+    margin-bottom: 6rem;
+    /*!!! In case we have shaky animations we use this!!!*/
+    backface-visibility: hidden;
+    
+    &--main {
+        display: block; /*occupies all space, newline before and after*/
+        font-size: 6rem;
+        font-weight: 400;
+        letter-spacing: 3.5rem;
+    
+        /* animation */
+        animation-name: moveInLeft;
+        animation-duration: 1s;
+        animation-timing-function: ease-out; /* how animations speeds up or down @ different moments */
+        /* animation-delay */
+        /* animation-iteration-count; */
+        /* animation-timing-function: cubic-bezier(); custom timing function */
+
+        @include respond(phone) { 
+            letter-spacing: 1rem;
+            font-size: 5rem;
+        }
+    }
+    
+    &--sub {
+        display: block;
+        font-size: 2rem;
+        font-weight: 700;
+        letter-spacing: 1.6rem; /*subject to change*/
+        animation: moveInRight 1s ease-out;
+
+        @include respond(phone) { 
+            letter-spacing: .5rem;
+        }
+    }
+}
+
+.heading-secondary{
+    font-size: 3.5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    display: inline-block; //won't use a whole line, just its space
+    background-image: linear-gradient(to right, $color-primary-light, $color-primary-dark);
+    -webkit-background-clip: text;
+    color: transparent;
+    letter-spacing: .2rem;
+    transition: all .2s;
+
+    @include respond(tab-land) { 
+        font-size: 3rem;
+    }
+
+    @include respond(tab-port) { 
+        font-size: 3rem;
+    }
+
+    @include respond(phone) { 
+        font-size: 2.5rem;
+    }
+
+    &:hover{
+        transform: skewY(.2deg) skewX(5deg) scale(1.01);
+        text-shadow: .5rem 1rem 2rem rgba($color-black, .2);
+    }
+}
+
+.heading-tertiary{
+    font-size: $default-font-size;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.paragraph{
+    font-size: $default-font-size;
+
+    &:not(:last-child){
+        margin-bottom: 3rem;
+    }
+}

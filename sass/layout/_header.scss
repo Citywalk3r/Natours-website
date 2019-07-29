@@ -1,0 +1,62 @@
+.header {
+    height: 85vh; /*95% of the viewport height, the remaining 5% space is at
+                    the bottom of the  page*/ 
+
+    background-image: 
+        linear-gradient(
+            to right bottom, /*direction of the gradient effect*/
+            rgba($color-primary-light, 0.8), /*R,G,B,opacity*/
+            rgba($color-primary-dark, 0.8)), /*R,G,B,opacity*/
+        url(../img/hero-small.jpg); /*..to go one folder up */
+
+    background-size:  cover; /*try to fit the image inside the box*/
+
+    background-position: top; /*whatever the viewport size, the top of the
+                                image is not cropped*/
+    position: relative;
+
+    
+
+    @supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)){
+        -webkit-clip-path: polygon(0 0,100% 0, 100% 75vh,0 100%);
+        clip-path: polygon(0 0,100% 0, 100% 75vh,0 100%); /*specify the corners of the polygon*/
+        height: 95vh;
+    }
+
+    @media only screen and (min-resolution: 192dpi) and (min-width: 37,5em),
+            only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 37,5em), 
+            only screen and (min-width: 125em){// , == OR
+        background-image: 
+            linear-gradient(
+                to right bottom, /*direction of the gradient effect*/
+                rgba($color-primary-light, 0.8), /*R,G,B,opacity*/
+                rgba($color-primary-dark, 0.8)), /*R,G,B,opacity*/
+            url(../img/hero.jpg); /*..to go one folder up */ 
+    }
+
+    @include respond(phone) { 
+        -webkit-clip-path: polygon(0 0,100% 0, 100% 85vh,0 100%);
+        clip-path: polygon(0 0,100% 0, 100% 85vh,0 100%); /*specify the corners of the polygon*/
+    }
+
+    &__logo-box{
+        position: absolute;
+        top: 4rem;
+        left: 4rem;
+    }
+
+    &__logo{
+        height: 3.5rem;
+    /* width will be figured out by the browser */
+    }
+    
+    &__text-box {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%); /*Relative the the object itself
+                                            in order to center it*/
+
+        text-align: center; /*In order to center the button below.Since it's an inline element*/
+    }
+}

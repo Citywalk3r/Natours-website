@@ -1,0 +1,58 @@
+
+/*BEM methodology (BLOCK ELEMENT MODIFIER)*/
+/*block__element--modifier*/
+
+
+/* In order to make every browser render the page in the 
+/  exact same way, perform a basic reset.
+*/
+
+
+/* universal selector */
+/*Initialisation*/
+
+*,
+::after,
+::before{
+    margin: 0; 
+    padding: 0;
+    box-sizing: inherit; /*Good practice. All elements inherit from their parent aka body*/
+}
+
+html{
+    font-size: 62.5%; /*Set a universal font-size for the browser so that we can use rem*/
+    /* We set it in percentage because we want to the user to be able to change the browser's
+    default font size. 16*0.625 = 10 */
+
+    @include respond(tab-land) { //width < 1200px ?
+        font-size: 56.25%; //1rem = 9px 9/16 = 56.25%
+    }
+
+    @include respond(tab-port) { //width < 900px ?
+        font-size: 50%; //1rem = 8px 8/16 = 50%
+    }
+
+    @include respond(big-desktop) { //width < 1800px ?
+        font-size: 75%; //1rem = 12px 12/16 = 75%
+    }
+}
+
+/* body element selector */
+
+/* everything related to fonts goes here */
+
+body {
+    box-sizing: border-box; /* change the box model so 
+                            that borders and paddings are 
+                            no longer added to the total width and height 
+                            that we specify for a box */
+    padding: 3rem; /*the whole page will be rendered Xpx away from the viewport*/
+    @include respond(tab-port) {
+        padding: 0;
+    }
+}
+
+::selection{
+    background-color: $color-primary;
+    color: $color-white;
+}

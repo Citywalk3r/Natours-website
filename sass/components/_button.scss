@@ -1,0 +1,123 @@
+/* link pseudo-class
+    -Use pseudo-classes to style elements under a special condition 
+    -btn:visited means that the user has already clicked the button once before
+     but still sees the button
+    -We declare it like this because we want the default state to be identical to the
+     visited stade
+*/
+
+.btn{
+    &,
+    &:link, 
+    &:visited{
+        text-transform: uppercase;
+        font-weight: 700;
+        text-decoration: none;
+        padding: 1.5rem 4rem; /*first is for top and bottom, second is left and right*/
+        display: inline-block; /*Easiest way to make it take its own space and not overlap*/
+        border-radius: 10rem;  /*make it round*/
+        transition: all .1s; /*Animation the easy way for all properties.
+                                It has to be in the initial state
+                                animations(transform,rotate etc.) in other states
+                                are going to happen in regard of that .2s*/
+        position: relative;
+        font-size: $default-font-size;
+
+        //CHANGES FOR THE <button> ELEMENT
+        border: none;
+        cursor: pointer;
+    }
+    /* Hover pseudo-class */
+    &:hover{
+        transform: translateY(-.3rem);
+        box-shadow: 0 1rem 2rem rgba($color-black,.2);/*specify where we want the shadow 3rd value 
+                                                is the blur of the shadow, 4th is the rgb */
+        /* after pseudo-element only when we have the button on hover state */
+        &::after {
+            transform: scaleX(1.4) scaleY(1.6);
+            opacity: 0;
+        }
+    }
+
+    /* Active pseudo-class */
+    &:active,
+    &:focus {
+        outline: none;
+        transform: translateY(-.1rem);
+        box-shadow: 0 .5rem 1rem rgba($color-black,.2); /*specify where we want the shadow 3rd value 
+                                                is the blur of the shadow, 4th is the rgb */
+    }
+
+
+    &--white {
+        background-color: $color-white;
+        color: $color-grey-dark;
+      
+        /* After pseudo-element for the white button
+        It's a child of the original button
+        appears behind it*/
+        &::after {
+            background-color: $color-white;
+
+        }
+    }
+
+    &--green {
+        background-color: $color-primary;
+        color: $color-white;
+      
+        &::after {
+            background-color: $color-primary;
+
+        }
+    }
+
+    /* After pseudo-element for the default button
+    It's a child of the original button
+    appears behind it*/
+    &::after {
+        content: ""; /* Have to specify the content and display properties to work*/
+        display: inline-block;
+        height: 100%;
+        width: 100%;
+        border-radius: 10rem;
+        position: absolute; /*to make it appear exactly behind our button, absolute needs
+                                to find a relative position*/
+        top: 0;             /*to make it appear exactly behind our button*/
+        left: 0;            /*to make it appear exactly behind our button*/
+        z-index: -1; /*z-index specifies the position of the element if it's on top of another*/
+        transition: all .4s; /*Defines all animations that will happen in children*/
+    }
+
+    /* new class for animating the button from the bottom*/
+    &--animated {
+        animation: moveInBottom .5s ease-out .5s; /*last one is delay*/
+        animation-fill-mode: backwards; /* applies the 0% style of the animation before it starts*/
+    }
+}
+
+.btn-text{
+    &:link,
+    &:visited{
+        font-size: $default-font-size;
+        color: $color-primary;
+        display: inline-block;
+        text-decoration: none;
+        border-bottom: 1px solid $color-primary;
+        padding: 3px;
+        transition: all .2s;
+    }
+
+    &:hover{
+        color: $color-white;
+        background-color: $color-primary;
+        box-shadow: 0 1rem 2rem rgba($color-black, .15);
+        transform: translateY(-2px);
+    }
+
+    &:active{
+        box-shadow: 0 1rem 1rem rgba($color-black, .15);
+        transform: translateY(0); 
+    }
+}
+
